@@ -1,19 +1,26 @@
 "use client";
 
 import { createTodo, getAllTodos } from "@/lib/actions/todo.actions";
+import { ApiRequest } from "@/lib/validators/todo";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
+interface Data {
+  content: string;
+  done: boolean;
+}
+
 export default function CreateTodo() {
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState<string | any>("");
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
     mutationFn: async () => {
-      await createTodo({ content, done: false });
+      const payload: ApiRequest = { content, done: false };
+      return await createTodo(payload);
     },
     onSettled: () => {
-      // invalidate the data
+      setContent("");
       queryClient.invalidateQueries();
     },
   });
