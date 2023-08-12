@@ -5,8 +5,12 @@ type TodoProps = {
 
 export default function TodoItem({ content, done }: TodoProps) {
   return (
-    <div>
-      <input type="checkbox" checked={done} />
+    <div className="flex gap-4">
+      <input
+        type="checkbox"
+        checked={done}
+        onChange={(e) => console.log(e.target.checked)}
+      />
       <h2>{content}</h2>
     </div>
   );
