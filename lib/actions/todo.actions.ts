@@ -11,3 +11,23 @@ export async function getAllTodos() {
 
     return todos;
 }
+
+interface Params {
+    content: string,
+    done: boolean
+  }
+  
+  export async function createTodo({ content, done }: Params
+  ) {
+    try {
+      connectToDB();
+  
+      const newTodo = await Todo.create({
+          content, done
+      });
+  
+    } catch (error: any) {
+      throw new Error(`Failed to create todo: ${error.message}`);
+    }
+  }
+  
