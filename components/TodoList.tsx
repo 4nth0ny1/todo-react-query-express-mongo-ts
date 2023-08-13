@@ -23,7 +23,12 @@ export default function TodoList() {
     <div>
       {todos?.map((todo) => {
         return (
-          <TodoItem key={todo._id} content={todo.content} done={todo.done} />
+          <TodoItem
+            key={todo._id}
+            _id={todo._id}
+            content={todo.content}
+            done={todo.done}
+          />
         );
       })}
     </div>

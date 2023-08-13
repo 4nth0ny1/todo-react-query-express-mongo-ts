@@ -30,4 +30,18 @@ interface Params {
       throw new Error(`Failed to create todo: ${error.message}`);
     }
   }
+
+  interface ToggleParams {
+    _id: string;
+    done: boolean;
+  }
+
+  export async function toggleTodo({ _id, done }: ToggleParams) {
+    try {
+      const todo = await Todo.findById(_id)
+      todo.updateOne(done)
+    } catch (error: any) {
+      throw new Error(`Failed to toggle todo: ${error.message}`);
+    }
+  }
   
